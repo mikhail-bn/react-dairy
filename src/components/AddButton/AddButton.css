@@ -1,0 +1,7 @@
+.add-button {
+    display: flex;
+    padding: 20px;
+    text-align: center;
+    gap: 12px;
+    justify-content: center;
+}

@@ -17,7 +17,7 @@
 }
 .journal-item__date,
 .journal-item__text {    
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -26,6 +26,7 @@
     color: rgba(255, 255, 255, 0.4);
 }
 .journal-item__text {
+    flex: 1 1 auto;
     color: rgba(255, 255, 255, 0.6);
     overflow: hidden;
 }

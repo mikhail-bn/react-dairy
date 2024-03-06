@@ -1,0 +1,6 @@
+.body {
+    flex: 1 1 auto;
+    padding: 20px;
+    min-width: 400px;
+    color: rgba(255, 255, 255, 0.4);   
+}
