@@ -15,7 +15,7 @@ export default function JournalForm({ onSubmit }) {
             <input type='date' name='date' />
             <input type='text' name='tag'  />
             <textarea name='text' id='' cols='30' rows='10'></textarea>
-            <Button text='Save' onClick={() => {console.log('clicked')}} />
+            <Button text='Save'  />
         </form>
     );
 }

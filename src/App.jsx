@@ -33,7 +33,7 @@ export default function App() {
                 text: item.text,
                 title: item.title,
                 date: new Date(item.date),
-                id: Math.max(...prevState.map((i) => i.id)) + 1,
+                id: prevState.length > 0 ? Math.max(...prevState.map((i) => i.id)) + 1 : 1,
             },
         ]);
         console.log(dataItems);
