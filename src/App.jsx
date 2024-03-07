@@ -7,6 +7,8 @@ import Body from './layout/Body/Body';
 import JournalList from './components/JournalList/JournalList';
 import Header from './components/Header/Header';
 import AddButton from './components/AddButton/AddButton';
+import { useState } from 'react';
+import JournalForm from './components/JournalForm/JournalForm';
 
 export default function App() {
     const data = [
@@ -21,6 +23,7 @@ export default function App() {
             date: new Date(),
         },
     ];
+
     return (
         <div className='app'>
             <LeftPanel>
@@ -44,18 +47,22 @@ export default function App() {
                 </JournalList>
             </LeftPanel>
             <Body>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet,
-                dolor dicta ipsa eligendi aliquid numquam et illo, modi illum
-                atque veniam molestias minus suscipit deserunt recusandae aut
-                aspernatur natus quidem veritatis sunt laboriosam. Suscipit ad
-                animi provident enim dolor voluptate repellat, at sed fugit,
-                reiciendis, aliquid dolorem impedit cumque iste incidunt
-                officia? Ex quas commodi ratione, dicta reprehenderit cum fuga
-                minima eligendi odit inventore suscipit, iure optio saepe
-                consectetur maxime ab incidunt rem earum quis. Ipsam maxime
-                nostrum voluptate distinctio quaerat natus magni vel, doloribus
-                optio consequuntur deserunt dolorum sed cumque quas aperiam
-                tempore culpa quasi in maiores. Nisi, exercitationem.
+                <JournalForm />
+                <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Amet, dolor dicta ipsa eligendi aliquid numquam et illo,
+                    modi illum atque veniam molestias minus suscipit deserunt
+                    recusandae aut aspernatur natus quidem veritatis sunt
+                    laboriosam. Suscipit ad animi provident enim dolor voluptate
+                    repellat, at sed fugit, reiciendis, aliquid dolorem impedit
+                    cumque iste incidunt officia? Ex quas commodi ratione, dicta
+                    reprehenderit cum fuga minima eligendi odit inventore
+                    suscipit, iure optio saepe consectetur maxime ab incidunt
+                    rem earum quis. Ipsam maxime nostrum voluptate distinctio
+                    quaerat natus magni vel, doloribus optio consequuntur
+                    deserunt dolorum sed cumque quas aperiam tempore culpa quasi
+                    in maiores. Nisi, exercitationem.
+                </p>
             </Body>
         </div>
     );

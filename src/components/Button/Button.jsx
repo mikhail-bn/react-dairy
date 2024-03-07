@@ -1,15 +1,11 @@
 import './Button.css';
 import { useState } from 'react';
 
-export default function Button() {
-    const [text, setText] = useState('Save');
+export default function Button({ text }) {
+    //const [text, setText] = useState('Save');
 
-    const clicked = () => {
-        setText((prevState) => prevState + '!');
-    };
-    return (
-        <button onClick={clicked} className='button accent'>
-            {text}
-        </button>
-    );
+    // const clicked = () => {
+    //     setText((prevState) => prevState + '!');
+    // };
+    return <button className='button accent'>{text}</button>;
 }
