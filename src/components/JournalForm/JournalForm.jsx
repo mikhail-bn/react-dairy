@@ -13,7 +13,6 @@ export default function JournalForm({ onSubmit }) {
     const addJournalItem = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        
         const formProps = Object.fromEntries(formData);
 
         // Проверка валидности данных
@@ -44,16 +43,12 @@ export default function JournalForm({ onSubmit }) {
             <input
                 type='text'
                 name='title'
-                style={{
-                    border: formValidState.title ? undefined : '1px solid red',
-                }}
+                className={`input ${formValidState.title ? '' : 'invalid'}`}
             />
             <input
                 type='date'
                 name='date'
-                style={{
-                    border: formValidState.date ? undefined : '1px solid red',
-                }}
+                className={`input ${formValidState.date ? '' : 'invalid'}`}
             />
             <input type='text' name='tag' />
             <textarea
@@ -61,9 +56,7 @@ export default function JournalForm({ onSubmit }) {
                 id=''
                 cols='30'
                 rows='10'
-                style={{
-                    border: formValidState.post ? undefined : '1px solid red',
-                }}
+                className={`input ${formValidState.post ? '' : 'invalid'}`}
             ></textarea>
             <Button text='Save' />
         </form>
