@@ -2,5 +2,6 @@
     flex: 1 1 auto;
     padding: 20px;
     min-width: 400px;
+    width: 100%;
     color: rgba(255, 255, 255, 0.4);   
 }

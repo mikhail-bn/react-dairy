@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-
-import './JournalForm.css';
+import styles from './JournalForm.module.css';
 import Button from '../Button/Button';
+import classnames from 'classnames';
 
 export default function JournalForm({ onSubmit }) {
     const [formValidState, setFormValidState] = useState({
@@ -39,24 +39,45 @@ export default function JournalForm({ onSubmit }) {
     };
 
     return (
-        <form className='journal-form' onSubmit={addJournalItem}>
-            <input
-                type='text'
-                name='title'
-                className={`input ${formValidState.title ? '' : 'invalid'}`}
-            />
-            <input
-                type='date'
-                name='date'
-                className={`input ${formValidState.date ? '' : 'invalid'}`}
-            />
-            <input type='text' name='tag' />
+        <form className={styles['journal-form']} onSubmit={addJournalItem}>
+            <div>
+                <input
+                    type='text'
+                    name='title'
+                    className={classnames(styles['input-title'], {
+                        [styles['ivalid']]: !formValidState.title,
+                    })}
+                />
+            </div>
+            <div className={styles['form-row']}>
+                <label htmlFor='date' className={styles['form-label']}>
+                    <img src='/public/date.svg' alt='calendar-icon' />
+                    <span>Date</span>
+                </label>
+                <input
+                    id='date'
+                    type='date'
+                    name='date'
+                    className={`${styles['input']}  ${
+                        formValidState.date ? '' : 'invalid'
+                    }`}
+                />
+            </div>
+            <div>
+                <label htmlFor='tag' className={styles['form-label']}>
+                    <img src='/public/tag.svg' alt='tag-icon' />
+                    <span>Tag</span>
+                </label>
+                <input type='text' name='tag' id='tag' className={styles['input']}/>
+            </div>
             <textarea
                 name='post'
                 id=''
                 cols='30'
                 rows='10'
-                className={`input ${formValidState.post ? '' : 'invalid'}`}
+                className={`${styles['input']}  ${
+                    formValidState.post ? '' : 'invalid'
+                }`}
             ></textarea>
             <Button text='Save' />
         </form>

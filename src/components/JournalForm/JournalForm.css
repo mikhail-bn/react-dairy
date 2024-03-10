@@ -1,9 +1,0 @@
-.journal-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.invalid {
-    border: 1px solid red;
-    background: rgb(104, 74, 74);
-}
