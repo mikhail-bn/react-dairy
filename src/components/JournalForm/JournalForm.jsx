@@ -45,7 +45,7 @@ export default function JournalForm({ onSubmit }) {
                     type='text'
                     name='title'
                     className={classnames(styles['input-title'], {
-                        [styles['ivalid']]: !formValidState.title,
+                        [styles['invalid']]: !formValidState.title,
                     })}
                 />
             </div>
@@ -63,21 +63,26 @@ export default function JournalForm({ onSubmit }) {
                     }`}
                 />
             </div>
-            <div>
+            <div className={styles['form-row']}>
                 <label htmlFor='tag' className={styles['form-label']}>
                     <img src='/public/tag.svg' alt='tag-icon' />
                     <span>Tag</span>
                 </label>
-                <input type='text' name='tag' id='tag' className={styles['input']}/>
+                <input
+                    type='text'
+                    name='tag'
+                    id='tag'
+                    className={styles['input']}
+                />
             </div>
             <textarea
                 name='post'
-                id=''
+                id='post'
                 cols='30'
                 rows='10'
-                className={`${styles['input']}  ${
-                    formValidState.post ? '' : 'invalid'
-                }`}
+                className={classnames(styles['input'], {
+                    [styles['invalid']]: !formValidState.post,
+                })}
             ></textarea>
             <Button text='Save' />
         </form>

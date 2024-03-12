@@ -3,11 +3,9 @@
     flex-direction: column;
     gap: 20px;
 }
-.invalid {
-    border: 1px solid red;
-    background: rgb(104, 74, 74);
-}
-.input-title {
+
+.input-title,
+.input {
     border: none;
     background: none;
     font-size: 32px;
@@ -16,6 +14,7 @@
     line-height: normal;
     font-family: 'Source Sans 3', sans-serif;
     border-bottom: 1px solid #272727;
+    width: 100%;
 }
 .form-label {
     display: flex;
@@ -27,4 +26,11 @@
     display: flex;
     align-items: center;
     gap: 50px;
+}
+.input {
+    font-size: 14px;
+}
+.invalid {
+    border: 1px solid red;
+    background: rgb(104, 74, 74);
 }
