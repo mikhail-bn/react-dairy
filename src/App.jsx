@@ -10,40 +10,38 @@ import AddButton from './components/AddButton/AddButton';
 import { useEffect, useState } from 'react';
 import JournalForm from './components/JournalForm/JournalForm';
 
-const initialData = [
-    {
-        title: 'Preparing',
-        text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, illum, necessitatibus porro nesciunt laboriosam magni nam eius possimus reiciendis, minima cupiditate sunt nobis obcaecati ut sequi neque cum suscipit odio.',
-        date: new Date(),
-    },
-    {
-        title: 'Implementation',
-        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nobis eveniet magni incidunt iure mollitia voluptas nulla illum soluta natus!',
-        date: new Date(),
-    },
-];
+// const initialData = [
+//     // {
+//     //     title: 'Preparing',
+//     //     text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, illum, necessitatibus porro nesciunt laboriosam magni nam eius possimus reiciendis, minima cupiditate sunt nobis obcaecati ut sequi neque cum suscipit odio.',
+//     //     date: new Date(),
+//     // },
+//     // {
+//     //     title: 'Implementation',
+//     //     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nobis eveniet magni incidunt iure mollitia voluptas nulla illum soluta natus!',
+//     //     date: new Date(),
+//     // },
+// ];
 
 export default function App() {
-    const [dataItems, setDataItems] = useState(initialData);
-
-    // useEffect(() => {
-    //     const parseData = JSON.parse(localStorage.getItem('data'))
-    //     if(data) {
-    //         setDataItems(data.map(item => ({
-    //             ...item,
-    //             date: new Date(item.date)
-    //         })))
-    //     }
-    // }, [])
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
-        if (!item.length) {
+        const parseData = JSON.parse(localStorage.getItem('data'));
+        if (parseData) {
+            setItems(
+                parseData.map(item => ({
+                    ...item,
+                    date: new Date(item.date),
+                }))
+            );
         }
-    }, [items]);
+    }, []);
 
+    
     //Функция добавления объекта в массив переданный в item
     const handleDataItems = (item) => {
-        setDataItems((prevState) => [
+        setItems((prevState) => [
             ...prevState,
             {
                 post: item.post,
@@ -55,7 +53,7 @@ export default function App() {
                         : 1,
             },
         ]);
-        console.log(dataItems);
+        console.log(items);
     };
     //Функция сортировки
     const sortItems = (a, b) => {
@@ -65,13 +63,13 @@ export default function App() {
         <p>There is no any story we have now, it's time to write something</p>
     );
 
-    if (dataItems.length > 0) {
-        listItems = dataItems.sort(sortItems).map((dataItem) => (
-            <CardButton key={dataItem.id}>
+    if (items.length > 0) {
+        listItems = items.sort(sortItems).map((item) => (
+            <CardButton key={item.id}>
                 <JournalItem
-                    title={dataItem.title}
-                    text={dataItem.text}
-                    date={dataItem.date}
+                    title={item.title}
+                    text={item.text}
+                    date={item.date}
                 />
             </CardButton>
         ));
