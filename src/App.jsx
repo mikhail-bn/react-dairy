@@ -10,18 +10,7 @@ import AddButton from './components/AddButton/AddButton';
 import { useEffect, useState } from 'react';
 import JournalForm from './components/JournalForm/JournalForm';
 
-// const initialData = [
-//     // {
-//     //     title: 'Preparing',
-//     //     text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, illum, necessitatibus porro nesciunt laboriosam magni nam eius possimus reiciendis, minima cupiditate sunt nobis obcaecati ut sequi neque cum suscipit odio.',
-//     //     date: new Date(),
-//     // },
-//     // {
-//     //     title: 'Implementation',
-//     //     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nobis eveniet magni incidunt iure mollitia voluptas nulla illum soluta natus!',
-//     //     date: new Date(),
-//     // },
-// ];
+
 
 export default function App() {
     const [items, setItems] = useState([]);
@@ -30,7 +19,7 @@ export default function App() {
         const parseData = JSON.parse(localStorage.getItem('data'));
         if (parseData) {
             setItems(
-                parseData.map(item => ({
+                parseData.map((item) => ({
                     ...item,
                     date: new Date(item.date),
                 }))
@@ -38,7 +27,12 @@ export default function App() {
         }
     }, []);
 
-    
+    useEffect(() => {
+        if (!items.length) {
+            localStorage.setItem('data', JSON.stringify(items));
+        }
+    }, [items]);
+
     //Функция добавления объекта в массив переданный в item
     const handleDataItems = (item) => {
         setItems((prevState) => [
