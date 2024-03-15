@@ -3,10 +3,28 @@ import styles from './JournalForm.module.css';
 import Button from '../Button/Button';
 import classnames from 'classnames';
 import { initialState, formReducer } from './JournalForm.state';
+import { flushSync } from 'react-dom';
 
 export default function JournalForm({ onSubmit }) {
     const [formState, dispatchForm] = useReducer(formReducer, initialState);
     const { isValid, isFormReadyToSubmit, values } = formState;
+    const titleRef = useRef();
+    const dateRef = useRef();
+    const postRef = useRef();
+
+    const focusError = (isValid) => {
+        switch (true) {
+            case !isValid.title:
+                titleRef.current.focus();
+                break;
+            case !isValid.date:
+                dateRef.current.focus();
+                break;
+            case !isValid.post:
+                postRef.current.focus();
+                break;
+        }
+    };
 
     // Если поля не валидны (false) в данном случае одно из, то через 2сек в useState formValidState поместить initialState
 
@@ -26,14 +44,21 @@ export default function JournalForm({ onSubmit }) {
     useEffect(() => {
         if (isFormReadyToSubmit) {
             onSubmit(values);
+            dispatchForm({ type: 'CLEAR' });
         }
-    }, [isFormReadyToSubmit]);
+    }, [isFormReadyToSubmit, values, onSubmit]);
+
+    const onChange = (e) => {
+        dispatchForm({
+            type: 'SET_VALUE',
+            payload: { [e.target.name]: e.target.value },
+        });
+    };
+
     // Функция передачи введенных в форму данных в props (в этом случае formProps) по нажатию кнопки
     const addJournalItem = (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        const formProps = Object.fromEntries(formData);
-        dispatchForm({ type: 'SUBMIT', payload: formProps });
+        dispatchForm({ type: 'SUBMIT' });
     };
 
     return (
@@ -41,6 +66,9 @@ export default function JournalForm({ onSubmit }) {
             <div>
                 <input
                     type='text'
+                    ref={titleRef}
+                    onChange={onChange}
+                    value={values.title}
                     name='title'
                     className={classnames(styles['input-title'], {
                         [styles['invalid']]: !isValid.title,
@@ -48,12 +76,19 @@ export default function JournalForm({ onSubmit }) {
                 />
             </div>
             <div className={styles['form-row']}>
-                <label htmlFor='date' className={styles['form-label']}>
+                <label
+                    htmlFor='date'
+                    onChange={onChange}
+                    value={values.data}
+                    className={styles['form-label']}
+                >
                     <img src='/public/date.svg' alt='calendar-icon' />
                     <span>Date</span>
                 </label>
                 <input
                     id='date'
+                    ref={dateRef}
+                    onChange={onChange}
                     type='date'
                     name='date'
                     className={classnames(styles['input'], {
@@ -68,6 +103,8 @@ export default function JournalForm({ onSubmit }) {
                 </label>
                 <input
                     type='text'
+                    onChange={onChange}
+                    value={values.tag}
                     name='tag'
                     id='tag'
                     className={styles['input']}
@@ -75,6 +112,9 @@ export default function JournalForm({ onSubmit }) {
             </div>
             <textarea
                 name='post'
+                ref={postRef}
+                onChange={onChange}
+                value={values.post}
                 id='post'
                 cols='30'
                 rows='10'
